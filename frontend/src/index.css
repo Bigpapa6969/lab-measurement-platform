@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---- Reset ------------------------------------------------------------ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---- Scrollbar -------------------------------------------------------- */
+::-webkit-scrollbar       { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1e2d42; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2d3f55; }
+
+/* ---- Plotly overrides ------------------------------------------------- */
+/* Remove the default white background that Plotly injects */
+.js-plotly-plot .plotly .main-svg { background: transparent !important; }
+
+/* ---- Utility classes -------------------------------------------------- */
+@layer components {
+  .panel {
+    @apply bg-scope-panel border border-scope-border rounded;
+  }
+
+  .panel-header {
+    @apply px-3 py-2 border-b border-scope-border text-xs font-mono font-semibold
+           uppercase tracking-widest text-ink-secondary;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 rounded
+           text-sm font-medium transition-colors duration-150
+           focus:outline-none focus:ring-1 focus:ring-accent/50
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent text-scope-bg hover:bg-accent/90 px-3 py-1.5;
+  }
+
+  .btn-secondary {
+    @apply btn bg-scope-hover border border-scope-border text-ink-primary
+           hover:bg-scope-border px-3 py-1.5;
+  }
+
+  .btn-danger {
+    @apply btn bg-fail/10 border border-fail/30 text-fail hover:bg-fail/20 px-3 py-1.5;
+  }
+
+  .input {
+    @apply w-full bg-scope-surface border border-scope-border rounded
+           text-sm text-ink-primary placeholder-ink-muted
+           focus:outline-none focus:border-accent/50
+           px-2 py-1.5;
+  }
+
+  .select {
+    @apply input appearance-none cursor-pointer;
+  }
+
+  .badge-pass       { @apply inline-flex px-2 py-0.5 rounded text-xs font-mono font-semibold bg-pass/15 text-pass; }
+  .badge-fail       { @apply inline-flex px-2 py-0.5 rounded text-xs font-mono font-semibold bg-fail/15 text-fail; }
+  .badge-not-tested { @apply inline-flex px-2 py-0.5 rounded text-xs font-mono font-semibold bg-scope-hover text-ink-secondary; }
+
+  .metric-row {
+    @apply flex items-center justify-between py-1.5 border-b border-scope-border/50 last:border-0;
+  }
+
+  .metric-label {
+    @apply text-xs text-ink-secondary font-mono;
+  }
+
+  .metric-value {
+    @apply text-xs font-mono text-ink-primary tabular-nums;
+  }
+}
