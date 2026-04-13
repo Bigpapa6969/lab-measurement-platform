@@ -17,7 +17,10 @@ import type {
   WaveformDataResponse,
 } from '../types';
 
-const BASE: string = import.meta.env.VITE_API_URL ?? '';
+// In development, Vite's proxy (vite.config.ts) forwards /measurements, /analysis, /reports
+// to localhost:8000, so BASE can be empty. In production on Vercel, the backend is served
+// at /_/backend (see vercel.json), so we prefix all requests with that path.
+const BASE: string = import.meta.env.VITE_API_URL ?? (import.meta.env.PROD ? '/_/backend' : '');
 
 // ---------------------------------------------------------------------------
 // Error type
